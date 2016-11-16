@@ -1,0 +1,40 @@
+{% extends 'polls/base.html' %}
+{% block main_content %}
+
+
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Cust Your Vote</div>
+                <div class="panel-body">
+                {{ question.question_text }}
+                {% if error_message %}
+                {{error_message}}
+                {% endif %}
+
+                <form action="{% url 'polls:vote' question.id %}" method="post">
+                {% csrf_token %}
+                    <table class="table table-condensed">
+                        <thead><tr><td></td><td></td></tr></thead>
+                        <tbody>
+                        {% for choice in question.choice_set.all %}
+                            <tr>
+                                <td>
+                                    <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}" />
+                                    <label for="choice{{forloop.counter}}">{{choice.choice_text}}</label>
+                                </td>
+                            </tr>
+                                {% endfor %}
+                            <tr>
+                                <td>
+                                    <input type="submit" value="vote" class="btn btn-success" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'polls/base.html' %}
+{% block main_content %}
+{% if latest_questions %}
+
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Select A Question</div>
+
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        {% for question in latest_questions %}
+                        <tbody>
+                            <tr>
+                                <td><b>{{question.question_text}}</b></td>
+
+                                <td>
+                                    <a href='/polls/{{question.id}}'>
+                                        <button type="button" class="btn btn-success">Select</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<p>You donot have any question. </p>
+
+
+
+
+{% endif %}
+{% endblock %}

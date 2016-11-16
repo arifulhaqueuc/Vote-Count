@@ -1,0 +1,29 @@
+{% extends 'polls/base.html' %}
+{% block main_content %}
+
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Voting Result</div>
+                <div class="panel-body">
+                    {{ question.question_text }}
+                    <table class="table table-condensed">
+                        <thead><tr><td></td><td></td></tr></thead>
+                        <tbody>
+                        {% for choice in question.choice_set.all %}
+                        <tr>
+                            <td>{{choice.choice_text}}</td>
+                            <td>{{choice.votes}} vote{{choice.votes|pluralize}}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <a href="{% url 'polls:detail' question.id %}">
+                        <button type="button" class="btn btn-warning">Vote Again</button>
+                    </a>
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
